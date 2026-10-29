@@ -74,7 +74,7 @@ function countStatuses(tasks) {
 
 function renderHeader() {
   document.getElementById("show-name").textContent = SHOW.name;
-  document.getElementById("show-date").textContent = formatDate(SHOW.date);
+  document.getElementById("show-date").textContent = SHOW.dateLabel || formatDate(SHOW.date);
   const days = Math.round((parseDate(SHOW.date) - today()) / 86400000);
   document.getElementById("days-left").textContent = Math.max(days, 0);
   document.getElementById("days-label").textContent = days === 1 ? "day to go" : "days to go";
