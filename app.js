@@ -28,6 +28,7 @@ function taskState(task) {
   return {
     status: saved.status || "not",
     people: saved.people || task.team || [],
+    due: saved.due ?? task.due ?? "",
   };
 }
 
@@ -53,8 +54,8 @@ function formatDate(s) {
   return parseDate(s).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
 }
 
-function isOverdue(task, status) {
-  return task.due && status !== "done" && parseDate(task.due) < today();
+function isOverdue(due, status) {
+  return Boolean(due) && status !== "done" && parseDate(due) < today();
 }
 
 function escapeHtml(s) {
@@ -92,30 +93,29 @@ function matchesFilters(task) {
 
   if (team === "__unassigned" && s.people.length) return false;
   if (team && team !== "__unassigned" && !s.people.includes(team)) return false;
-  if (status === "overdue") return isOverdue(task, s.status);
+  if (status === "overdue") return isOverdue(s.due, s.status);
   if (status && s.status !== status) return false;
   return true;
 }
 
 function renderTask(task) {
   const s = taskState(task);
-  const overdue = isOverdue(task, s.status);
+  const overdue = isOverdue(s.due, s.status);
   const chips = s.people.length
     ? s.people.map(p => `<span class="chip">${escapeHtml(p)}</span>`).join("")
     : `<span class="chip empty">Unassigned</span>`;
-  const due = task.due
-    ? `<div class="task-due${overdue ? " overdue" : ""}">${overdue ? "Overdue · " : "Due "}${formatDate(task.due)}</div>`
-    : "";
+  const deadlineLabel = s.due ? `${overdue ? `<span class="overdue-word">Overdue · </span>` : ""}${formatDate(s.due)}` : "Deadline";
 
   return `
     <div class="task" data-status="${s.status}">
       <button class="status-btn" data-status="${s.status}" data-id="${task.id}" title="Tap to change status">
         ${STATUS_LABEL[s.status]}
       </button>
-      <div>
-        <div class="task-title">${escapeHtml(task.title)}</div>
-        ${due}
-      </div>
+      <div class="task-title">${escapeHtml(task.title)}</div>
+      <label class="deadline${s.due ? " set" : ""}${overdue ? " overdue" : ""}" title="Set deadline">
+        <span>${deadlineLabel}</span>
+        <input type="date" class="deadline-input" data-id="${task.id}" value="${s.due}" aria-label="Deadline for ${escapeHtml(task.title)}">
+      </label>
       <button class="people" data-id="${task.id}" title="Change who's in charge">${chips}</button>
     </div>`;
 }
@@ -180,6 +180,14 @@ document.getElementById("phases").addEventListener("click", e => {
   }
   const peopleBtn = e.target.closest(".people");
   if (peopleBtn) openAssign(peopleBtn.dataset.id);
+  const dateInput = e.target.closest(".deadline-input");
+  if (dateInput && dateInput.showPicker) {
+    try { dateInput.showPicker(); } catch { /* browser opens its own picker */ }
+  }
+});
+
+document.getElementById("phases").addEventListener("change", e => {
+  if (e.target.matches(".deadline-input")) updateTask(e.target.dataset.id, { due: e.target.value });
 });
 
 // Filters
