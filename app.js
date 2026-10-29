@@ -304,15 +304,32 @@ assignDialog.addEventListener("close", () => {
   assigningId = null;
 });
 
+// Claim dialog (teams) ------------------------------------------------------------------
+
+const claimDialog = document.getElementById("claim-dialog");
+let claimingId = null;
+
+function openClaim(task) {
+  claimingId = task.id;
+  document.getElementById("claim-text").innerHTML =
+    `Put <strong>${escapeHtml(session.name)}</strong> in charge of "${escapeHtml(task.title)}"?`;
+  claimDialog.showModal();
+}
+
+claimDialog.addEventListener("close", () => {
+  if (claimDialog.returnValue === "claim" && claimingId) {
+    changeTask(claimingId, "set_people", { p_people: [session.name] });
+  }
+  claimingId = null;
+});
+
 // Task clicks -------------------------------------------------------------------------
 
 function handlePeopleClick(task) {
   if (session.isAdmin) {
     openAssign(task);
   } else if (!task.people.length) {
-    if (confirm(`Claim "${task.title}" for ${session.name}?`)) {
-      changeTask(task.id, "set_people", { p_people: [session.name] });
-    }
+    openClaim(task);
   } else {
     toast("This task is already taken. Only the admin can reassign it.");
   }
