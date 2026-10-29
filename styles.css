@@ -1,16 +1,16 @@
 :root {
-  --blue: #1960ad;
-  --blue-dark: #0f3f75;
-  --red: #ec1e24;
+  --blue: #7600f5;
+  --blue-dark: #45008f;
+  --red: #f57600;
   --bg: #f3f6fb;
   --card: #ffffff;
   --text: #1b2433;
   --muted: #5d6b80;
   --line: #dde4ee;
   --not: #8a96a8;
-  --progress: #e8a317;
-  --done: #2e9e5b;
-  --overdue: #ec1e24;
+  --progress: #f57600;
+  --done: #00f576;
+  --overdue: #d0021b;
 }
 
 * { box-sizing: border-box; }
@@ -122,7 +122,7 @@ main { max-width: 960px; margin: 16px auto 40px; }
   background: var(--card);
   border-radius: 12px;
   border-left: 6px solid var(--blue);
-  box-shadow: 0 1px 3px rgba(15, 63, 117, .08);
+  box-shadow: 0 1px 3px rgba(69, 0, 143, .08);
   margin-bottom: 16px;
   overflow: hidden;
 }
@@ -169,8 +169,8 @@ main { max-width: 960px; margin: 16px auto 40px; }
   color: #fff;
 }
 .status-btn[data-status="not"] { background: var(--not); }
-.status-btn[data-status="progress"] { background: var(--progress); }
-.status-btn[data-status="done"] { background: var(--done); }
+.status-btn[data-status="progress"] { background: var(--progress); color: #2b1500; }
+.status-btn[data-status="done"] { background: var(--done); color: #003a1c; }
 
 .task-title { font-weight: 500; }
 .task[data-status="done"] .task-title { color: var(--muted); text-decoration: line-through; }
@@ -196,7 +196,7 @@ main { max-width: 960px; margin: 16px auto 40px; }
   font-weight: 600;
   padding: 3px 9px;
   border-radius: 99px;
-  background: #e6eef8;
+  background: #efe4ff;
   color: var(--blue-dark);
 }
 .chip.empty { background: #fde8e8; color: #a4161a; }
@@ -209,7 +209,7 @@ dialog {
   width: min(360px, calc(100vw - 32px));
   box-shadow: 0 10px 40px rgba(0,0,0,.25);
 }
-dialog::backdrop { background: rgba(15, 30, 60, .45); }
+dialog::backdrop { background: rgba(40, 0, 80, .45); }
 dialog h2 { margin: 0 0 12px; font-size: 17px; }
 .assign-options { display: grid; gap: 8px; }
 .assign-options label {
