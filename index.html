@@ -24,8 +24,10 @@
     </div>
   </header>
 
-  <div class="notice">
-    Preview version: changes save only on this device until the shared database is connected.
+  <div class="session-bar">
+    <span id="session-text"></span>
+    <button id="sign-in-btn" class="btn-primary">Sign in</button>
+    <button id="sign-out-btn" class="btn-ghost" hidden>Sign out</button>
   </div>
 
   <nav class="filters" aria-label="Filters">
@@ -48,6 +50,23 @@
 
   <main id="phases"></main>
 
+  <dialog id="sign-in-dialog">
+    <form id="sign-in-form">
+      <h2>Sign in</h2>
+      <label class="field">Team
+        <select id="sign-in-team"></select>
+      </label>
+      <label class="field">PIN
+        <input id="sign-in-pin" type="password" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="off" required>
+      </label>
+      <p id="sign-in-error" class="form-error" role="alert"></p>
+      <div class="dialog-actions">
+        <button type="button" id="sign-in-cancel" class="btn-ghost">Cancel</button>
+        <button type="submit" class="btn-primary">Sign in</button>
+      </div>
+    </form>
+  </dialog>
+
   <dialog id="assign-dialog">
     <form method="dialog">
       <h2 id="assign-title">In charge</h2>
@@ -59,7 +78,9 @@
     </form>
   </dialog>
 
-  <script src="tasks.js"></script>
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <script src="config.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

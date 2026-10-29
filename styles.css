@@ -75,16 +75,19 @@ body {
 .bar span:first-child { background: var(--done); }
 .bar span:last-child { background: var(--progress); }
 
-.notice {
+.session-bar {
   max-width: 960px;
   margin: 14px auto 0;
-  padding: 8px 12px;
-  background: #fff7e0;
-  border: 1px solid #f1d58a;
-  border-radius: 8px;
-  font-size: 13px;
-  color: #6b5200;
+  padding: 8px 8px 8px 14px;
+  background: var(--card);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
 }
+.session-bar span { flex: 1; }
+.session-bar button { padding: 6px 14px; }
 
 /* Filters */
 .filters {
@@ -254,6 +257,47 @@ dialog h2 { margin: 0 0 12px; font-size: 17px; }
 .btn-primary { background: var(--blue); color: #fff; border: 0; }
 .btn-ghost { background: #fff; color: var(--text); border: 1px solid var(--line); }
 
+/* Sign-in dialog */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.field select, .field input {
+  font: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text);
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.field input { letter-spacing: 6px; }
+.form-error { color: var(--overdue); font-size: 14px; min-height: 1em; margin: 0; }
+
+/* Tasks the signed-in team can't change */
+.task.locked .status-btn, .task.locked .deadline { cursor: not-allowed; }
+.task.saving { opacity: .6; pointer-events: none; }
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  max-width: calc(100vw - 32px);
+  background: #1b2433;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.3);
+  z-index: 10;
+}
+
 .empty-state { text-align: center; color: var(--text); padding: 30px; }
 
 /* Phone layout */
@@ -261,7 +305,7 @@ dialog h2 { margin: 0 0 12px; font-size: 17px; }
   .hero-inner { flex-direction: column; text-align: center; gap: 12px; }
   .logo { width: 110px; }
   .hero h1 { font-size: 26px; }
-  .notice, .filters, main { margin-left: 16px; margin-right: 16px; }
+  .session-bar, .filters, main { margin-left: 16px; margin-right: 16px; }
   .filters select { min-width: 0; width: 100%; }
   .filters label { flex: 1; }
   .phase-head .bar { display: none; }
