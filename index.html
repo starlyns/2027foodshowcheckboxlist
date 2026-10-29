@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2027 Food Show Tasks</title>
+  <link rel="icon" href="assets/victory-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <img class="logo" src="assets/victory-logo.png" alt="Victory Foodservice">
+      <div class="hero-text">
+        <h1 id="show-name">2027 Food Show</h1>
+        <p class="countdown"><span id="days-left">–</span> <span id="days-label">days to go</span> · <span id="show-date"></span></p>
+      </div>
+    </div>
+    <div class="overall">
+      <div class="bar" aria-hidden="true"><span id="overall-done"></span><span id="overall-progress"></span></div>
+      <p id="overall-text"></p>
+    </div>
+  </header>
+
+  <div class="notice">
+    Preview version: changes save only on this device until the shared database is connected.
+  </div>
+
+  <nav class="filters" aria-label="Filters">
+    <label>Team
+      <select id="filter-team">
+        <option value="">All teams</option>
+        <option value="__unassigned">Unassigned</option>
+      </select>
+    </label>
+    <label>Status
+      <select id="filter-status">
+        <option value="">All statuses</option>
+        <option value="not">Not started</option>
+        <option value="progress">In progress</option>
+        <option value="done">Done</option>
+        <option value="overdue">Overdue</option>
+      </select>
+    </label>
+  </nav>
+
+  <main id="phases"></main>
+
+  <dialog id="assign-dialog">
+    <form method="dialog">
+      <h2 id="assign-title">In charge</h2>
+      <div id="assign-options" class="assign-options"></div>
+      <div class="dialog-actions">
+        <button value="cancel" class="btn-ghost">Cancel</button>
+        <button value="save" class="btn-primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="tasks.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
