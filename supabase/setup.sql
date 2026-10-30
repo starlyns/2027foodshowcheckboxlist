@@ -289,7 +289,7 @@ insert into public.tasks (id, phase, position, title) values
   ('6-3', 'Social Media & Promotion', 52, 'Invite Bronx/NYC food creators (English and Spanish)'),
   ('6-4', 'Social Media & Promotion', 53, 'Pitch Bronx Times and Spanish-language media'),
   ('6-5', 'Social Media & Promotion', 54, 'Branded hashtag and photo wall'),
-  ('7-1', 'Show Experience', 55, 'Pick theme (Sophia suggested "The Next Big Bite") but that is the baldor name'),
+  ('7-1', 'Show Experience', 55, 'Pick theme'),
   ('7-2', 'Show Experience', 56, 'Zone the floor by category, plus Emerging Brands and Tech zones'),
   ('7-3', 'Show Experience', 57, 'Book bilingual host/emcee'),
   ('7-4', 'Show Experience', 58, 'Book headliner chef for a fixed-time talk'),
